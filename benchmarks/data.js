@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1607958639078,
+  "lastUpdate": 1607958644000,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -118,6 +118,46 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000007080176518184447",
             "extra": "mean: 5.864926065035076 usec\nrounds: 107527"
+          }
+        ]
+      }
+    ],
+    "OpenTelemetry Python Benchmarks - Python 3.7 -": [
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "distinct": true,
+          "id": "a59a217f3e79dddcc57268da2d1a7d1cbe3a8f22",
+          "message": "Merge branch 'master' of https://github.com/open-telemetry/opentelemetry-python",
+          "timestamp": "2020-12-14T20:36:56+05:30",
+          "tree_id": "0988f882c87f2990a11c1c6e4dec0779347c53c7",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/a59a217f3e79dddcc57268da2d1a7d1cbe3a8f22"
+        },
+        "date": 1607958639585,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 17618.769440207485,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00006258492084679405",
+            "extra": "mean: 56.7576528765918 usec\nrounds: 4641"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 14136.324909812849,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00001952120870176414",
+            "extra": "mean: 70.73974363066893 usec\nrounds: 8164"
           }
         ]
       }
