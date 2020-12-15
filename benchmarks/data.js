@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608046276978,
+  "lastUpdate": 1608046281295,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -666,6 +666,46 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00003322552437831147",
             "extra": "mean: 61.56610883509672 usec\nrounds: 5761"
+          }
+        ]
+      }
+    ],
+    "OpenTelemetry Python Benchmarks - Python 3.6 - core": [
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "distinct": true,
+          "id": "a75f2da8608807cd69096a73b05fbb28f3752de5",
+          "message": "Merge branch 'master' of https://github.com/open-telemetry/opentelemetry-python\nadd changes related to reading the env variable OTEL_PYTHON_DISABLED_INSTRUMENTATIONS into _load_instrumentors method",
+          "timestamp": "2020-12-15T20:56:00+05:30",
+          "tree_id": "ed5d95083eb7b844fcaa209ffde54a180a08ec03",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/a75f2da8608807cd69096a73b05fbb28f3752de5"
+        },
+        "date": 1608046273853,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 20943.44430171309,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000033352040554597744",
+            "extra": "mean: 47.74763814365548 usec\nrounds: 1379"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 15244.541371132713,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000045786362236142805",
+            "extra": "mean: 65.5972505603622 usec\nrounds: 5356"
           }
         ]
       }
