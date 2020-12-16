@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608145537836,
+  "lastUpdate": 1608145879978,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -1732,6 +1732,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00006121028210834796",
             "extra": "mean: 96.66625247044406 usec\nrounds: 4254"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9d0834d38f8a8eb1e9849d4924357f3d6e569471",
+          "message": "Auto-instrumentation should exclude packages mentioned in OTEL_PYTHON_DISABLED_INSTRUMENTATIONS env variable (#1461)",
+          "timestamp": "2020-12-16T10:05:26-08:00",
+          "tree_id": "5fcf72add1ef9ed1bd2125ec45e2d929870f36f3",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/9d0834d38f8a8eb1e9849d4924357f3d6e569471"
+        },
+        "date": 1608145878973,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 20179.154842995387,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000009129667486651528",
+            "extra": "mean: 49.55608932983243 usec\nrounds: 1265"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 14039.39584596846,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000740936056511943",
+            "extra": "mean: 71.22813623687084 usec\nrounds: 6173"
           }
         ]
       }
