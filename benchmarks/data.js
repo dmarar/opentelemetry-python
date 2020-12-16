@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608142431107,
+  "lastUpdate": 1608142435187,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -1236,6 +1236,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00006376089028409692",
             "extra": "mean: 63.223369039478435 usec\nrounds: 5872"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "distinct": true,
+          "id": "ec7200520f275fb061f3e7ec1448e9dd8005f09f",
+          "message": "Merge branch 'master' of https://github.com/open-telemetry/opentelemetry-python",
+          "timestamp": "2020-12-16T23:39:52+05:30",
+          "tree_id": "5fcf72add1ef9ed1bd2125ec45e2d929870f36f3",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/ec7200520f275fb061f3e7ec1448e9dd8005f09f"
+        },
+        "date": 1608142431117,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 31670.125886158137,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000001026118037898233",
+            "extra": "mean: 31.575498108047107 usec\nrounds: 5021"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 23922.510414258748,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000001146236366659967",
+            "extra": "mean: 41.80163296758191 usec\nrounds: 8111"
           }
         ]
       }
