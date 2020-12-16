@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608144202313,
+  "lastUpdate": 1608144357784,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -928,6 +928,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000006092022219991201",
             "extra": "mean: 44.19702117229544 usec\nrounds: 6707"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "distinct": true,
+          "id": "ec7200520f275fb061f3e7ec1448e9dd8005f09f",
+          "message": "Merge branch 'master' of https://github.com/open-telemetry/opentelemetry-python",
+          "timestamp": "2020-12-16T23:39:52+05:30",
+          "tree_id": "5fcf72add1ef9ed1bd2125ec45e2d929870f36f3",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/ec7200520f275fb061f3e7ec1448e9dd8005f09f"
+        },
+        "date": 1608144353237,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 28952.672123779208,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00000201040247577578",
+            "extra": "mean: 34.53912632743446 usec\nrounds: 4615"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 21845.48940080082,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000039146475795664775",
+            "extra": "mean: 45.77604015423621 usec\nrounds: 7795"
           }
         ]
       }
