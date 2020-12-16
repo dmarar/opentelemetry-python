@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608145464790,
+  "lastUpdate": 1608145537836,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -1080,6 +1080,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000039146475795664775",
             "extra": "mean: 45.77604015423621 usec\nrounds: 7795"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9d0834d38f8a8eb1e9849d4924357f3d6e569471",
+          "message": "Auto-instrumentation should exclude packages mentioned in OTEL_PYTHON_DISABLED_INSTRUMENTATIONS env variable (#1461)",
+          "timestamp": "2020-12-16T10:05:26-08:00",
+          "tree_id": "5fcf72add1ef9ed1bd2125ec45e2d929870f36f3",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/9d0834d38f8a8eb1e9849d4924357f3d6e569471"
+        },
+        "date": 1608145536825,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 31949.329255891796,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000001049988462496207",
+            "extra": "mean: 31.299561627435082 usec\nrounds: 5087"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 23753.56151119772,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000010563627213923482",
+            "extra": "mean: 42.09895006812295 usec\nrounds: 7370"
           }
         ]
       }
