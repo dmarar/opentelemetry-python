@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608137963604,
+  "lastUpdate": 1608138622922,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -930,6 +930,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000011658547858131846",
             "extra": "mean: 6.9495292710230965 usec\nrounds: 114943"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d1072cd6d30824753721dd5364f34bfc503bb44b",
+          "message": "Update opentelemetry-instrumentation/src/opentelemetry/instrumentation/auto_instrumentation/sitecustomize.py\n\nCo-authored-by: Diego Hurtado <ocelotl@users.noreply.github.com>",
+          "timestamp": "2020-12-16T22:37:39+05:30",
+          "tree_id": "5fcf72add1ef9ed1bd2125ec45e2d929870f36f3",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/d1072cd6d30824753721dd5364f34bfc503bb44b"
+        },
+        "date": 1608138621280,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 233681.6626448348,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000053791300511172804",
+            "extra": "mean: 4.279325937182617 usec\nrounds: 147059"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 180782.2340640666,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00000739146346808916",
+            "extra": "mean: 5.531516994339247 usec\nrounds: 103093"
           }
         ]
       }
