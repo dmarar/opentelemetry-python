@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1608144716956,
+  "lastUpdate": 1608144760802,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -1618,6 +1618,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00005135118479038841",
             "extra": "mean: 82.0849530820347 usec\nrounds: 6032"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "committer": {
+            "email": "55284676+dmarar@users.noreply.github.com",
+            "name": "Dilip M",
+            "username": "dmarar"
+          },
+          "distinct": true,
+          "id": "ec7200520f275fb061f3e7ec1448e9dd8005f09f",
+          "message": "Merge branch 'master' of https://github.com/open-telemetry/opentelemetry-python",
+          "timestamp": "2020-12-16T23:39:52+05:30",
+          "tree_id": "5fcf72add1ef9ed1bd2125ec45e2d929870f36f3",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/ec7200520f275fb061f3e7ec1448e9dd8005f09f"
+        },
+        "date": 1608144759706,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 13976.44852454602,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000047981127646670184",
+            "extra": "mean: 71.54893449818518 usec\nrounds: 1206"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 10344.871911795199,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00006121028210834796",
+            "extra": "mean: 96.66625247044406 usec\nrounds: 4254"
           }
         ]
       }
