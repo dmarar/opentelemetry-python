@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1611396812917,
+  "lastUpdate": 1611396821129,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -924,6 +924,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000005674704552916073",
             "extra": "mean: 55.98253955648527 usec\nrounds: 6181"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "anton.ryzhov@zalando.de",
+            "name": "Anton Ryzhov",
+            "username": "anton-ryzhov"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6489bf50a576c9c772d2f7b78d677cf16b4526ac",
+          "message": "Add `Span.set_attributes` method (#1520)",
+          "timestamp": "2021-01-21T12:42:01-08:00",
+          "tree_id": "b1637c968e9624dee4e4588021e48d8372f25eba",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/6489bf50a576c9c772d2f7b78d677cf16b4526ac"
+        },
+        "date": 1611396820056,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 25939.112136227686,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000043522004528733706",
+            "extra": "mean: 38.55182069255781 usec\nrounds: 4852"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 19109.47599645994,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000005394957701853799",
+            "extra": "mean: 52.33005866750357 usec\nrounds: 6784"
           }
         ]
       }
