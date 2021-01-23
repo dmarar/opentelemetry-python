@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1611396787027,
+  "lastUpdate": 1611396790930,
   "repoUrl": "https://github.com/dmarar/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.9 -": [
@@ -4222,6 +4222,46 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000007002316464051437",
             "extra": "mean: 5.638145912497166 usec\nrounds: 68966"
+          }
+        ]
+      }
+    ],
+    "OpenTelemetry Python Benchmarks - Python pypy3 - propagator": [
+      {
+        "commit": {
+          "author": {
+            "email": "anton.ryzhov@zalando.de",
+            "name": "Anton Ryzhov",
+            "username": "anton-ryzhov"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6489bf50a576c9c772d2f7b78d677cf16b4526ac",
+          "message": "Add `Span.set_attributes` method (#1520)",
+          "timestamp": "2021-01-21T12:42:01-08:00",
+          "tree_id": "b1637c968e9624dee4e4588021e48d8372f25eba",
+          "url": "https://github.com/dmarar/opentelemetry-python/commit/6489bf50a576c9c772d2f7b78d677cf16b4526ac"
+        },
+        "date": 1611396789700,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 411109.2951283734,
+            "unit": "iter/sec",
+            "range": "stddev: 3.78062284940409e-7",
+            "extra": "mean: 2.4324431771549317 usec\nrounds: 58480"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 758387.2825514391,
+            "unit": "iter/sec",
+            "range": "stddev: 3.6140279023353435e-7",
+            "extra": "mean: 1.3185875119581514 usec\nrounds: 108696"
           }
         ]
       }
