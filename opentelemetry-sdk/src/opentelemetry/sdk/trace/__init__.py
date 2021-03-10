@@ -54,7 +54,7 @@ from opentelemetry.trace import SpanContext
 from opentelemetry.trace.propagation import SPAN_KEY
 from opentelemetry.trace.status import Status, StatusCode
 from opentelemetry.util import types
-from opentelemetry.util.time import time_ns
+from opentelemetry.util._time import _time_ns
 
 logger = logging.getLogger(__name__)
 
@@ -171,9 +171,9 @@ class SynchronousMultiSpanProcessor(SpanProcessor):
             True if all span processors flushed their spans within the
             given timeout, False otherwise.
         """
-        deadline_ns = time_ns() + timeout_millis * 1000000
+        deadline_ns = _time_ns() + timeout_millis * 1000000
         for sp in self._span_processors:
-            current_time_ns = time_ns()
+            current_time_ns = _time_ns()
             if current_time_ns >= deadline_ns:
                 return False
 
@@ -273,7 +273,7 @@ class EventBase(abc.ABC):
     def __init__(self, name: str, timestamp: Optional[int] = None) -> None:
         self._name = name
         if timestamp is None:
-            self._timestamp = time_ns()
+            self._timestamp = _time_ns()
         else:
             self._timestamp = timestamp
 
@@ -521,8 +521,12 @@ class ReadableSpan:
     @staticmethod
     def _format_context(context):
         x_ctx = OrderedDict()
-        x_ctx["trace_id"] = trace_api.format_trace_id(context.trace_id)
-        x_ctx["span_id"] = trace_api.format_span_id(context.span_id)
+        x_ctx["trace_id"] = "0x{}".format(
+            trace_api.format_trace_id(context.trace_id)
+        )
+        x_ctx["span_id"] = "0x{}".format(
+            trace_api.format_span_id(context.span_id)
+        )
         x_ctx["trace_state"] = repr(context.trace_state)
         return x_ctx
 
@@ -704,7 +708,7 @@ class Span(trace_api.Span, ReadableSpan):
             Event(
                 name=name,
                 attributes=attributes,
-                timestamp=time_ns() if timestamp is None else timestamp,
+                timestamp=_time_ns() if timestamp is None else timestamp,
             )
         )
 
@@ -734,7 +738,7 @@ class Span(trace_api.Span, ReadableSpan):
                 logger.warning("Calling start() on a started span.")
                 return
             self._start_time = (
-                start_time if start_time is not None else time_ns()
+                start_time if start_time is not None else _time_ns()
             )
 
         self._span_processor.on_start(self, parent_context=parent_context)
@@ -747,7 +751,7 @@ class Span(trace_api.Span, ReadableSpan):
                 logger.warning("Calling end() on an ended span.")
                 return
 
-            self._end_time = end_time if end_time is not None else time_ns()
+            self._end_time = end_time if end_time is not None else _time_ns()
 
         self._span_processor.on_end(self._readable_span())
 
@@ -776,10 +780,7 @@ class Span(trace_api.Span, ReadableSpan):
                 self.record_exception(exception=exc_val, escaped=True)
             # Records status if span is used as context manager
             # i.e. with tracer.start_span() as span:
-            if (
-                self._status.status_code is StatusCode.UNSET
-                and self._set_status_on_exception
-            ):
+            if self._set_status_on_exception:
                 self.set_status(
                     Status(
                         status_code=StatusCode.ERROR,
@@ -869,7 +870,12 @@ class Tracer(trace_api.Tracer):
             record_exception=record_exception,
             set_status_on_exception=set_status_on_exception,
         )
-        with self.use_span(span, end_on_exit=end_on_exit) as span_context:
+        with trace_api.use_span(
+            span,
+            end_on_exit=end_on_exit,
+            record_exception=record_exception,
+            set_status_on_exception=set_status_on_exception,
+        ) as span_context:
             yield span_context
 
     def start_span(  # pylint: disable=too-many-locals
@@ -949,44 +955,6 @@ class Tracer(trace_api.Tracer):
         else:
             span = trace_api.NonRecordingSpan(context=span_context)
         return span
-
-    @contextmanager
-    def use_span(
-        self, span: trace_api.Span, end_on_exit: bool = False,
-    ) -> Iterator[trace_api.Span]:
-        try:
-            token = context_api.attach(context_api.set_value(SPAN_KEY, span))
-            try:
-                yield span
-            finally:
-                context_api.detach(token)
-
-        except Exception as exc:  # pylint: disable=broad-except
-            # Record the exception as an event
-            if isinstance(span, Span) and span.is_recording():
-                # pylint:disable=protected-access
-                if span._record_exception:
-                    span.record_exception(exc)
-
-                # Records status if use_span is used
-                # i.e. with tracer.start_as_current_span() as span:
-                if (
-                    span._status.status_code is StatusCode.UNSET
-                    and span._set_status_on_exception
-                ):
-                    span.set_status(
-                        Status(
-                            status_code=StatusCode.ERROR,
-                            description="{}: {}".format(
-                                type(exc).__name__, exc
-                            ),
-                        )
-                    )
-            raise
-
-        finally:
-            if end_on_exit:
-                span.end()
 
 
 class TracerProvider(trace_api.TracerProvider):

@@ -37,8 +37,8 @@ from opentelemetry.sdk.trace import Resource, sampling
 from opentelemetry.sdk.trace.id_generator import RandomIdGenerator
 from opentelemetry.sdk.util import ns_to_iso_str
 from opentelemetry.sdk.util.instrumentation import InstrumentationInfo
-from opentelemetry.trace.status import StatusCode
-from opentelemetry.util.time import time_ns
+from opentelemetry.trace import StatusCode
+from opentelemetry.util._time import _time_ns
 
 
 def new_tracer() -> trace_api.Tracer:
@@ -121,18 +121,6 @@ tracer_provider.add_span_processor(mock_processor)
         # test shutdown_on_exit=False
         out = run_general_code(False, False)
         self.assertTrue(out.startswith(b"0"))
-
-    def test_use_span_exception(self):
-        class TestUseSpanException(Exception):
-            pass
-
-        default_span = trace_api.NonRecordingSpan(
-            trace_api.INVALID_SPAN_CONTEXT
-        )
-        tracer = new_tracer()
-        with self.assertRaises(TestUseSpanException):
-            with tracer.use_span(default_span):
-                raise TestUseSpanException()
 
     def test_tracer_provider_accepts_concurrent_multi_span_processor(self):
         span_processor = trace.ConcurrentMultiSpanProcessor(2)
@@ -307,7 +295,7 @@ class TestSpanCreation(unittest.TestCase):
         self.assertIsNone(root.end_time)
         self.assertEqual(root.kind, trace_api.SpanKind.INTERNAL)
 
-        with tracer.use_span(root, True):
+        with trace_api.use_span(root, True):
             self.assertIs(trace_api.get_current_span(), root)
 
             with tracer.start_span(
@@ -364,7 +352,7 @@ class TestSpanCreation(unittest.TestCase):
         self.assertIsNone(root.end_time)
 
         # Test with the implicit root span
-        with tracer.use_span(root, True):
+        with trace_api.use_span(root, True):
             self.assertIs(trace_api.get_current_span(), root)
 
             with tracer.start_span("stepchild", other_parent_context) as child:
@@ -721,7 +709,7 @@ class TestSpan(unittest.TestCase):
             )
 
             # event name, attributes and timestamp
-            now = time_ns()
+            now = _time_ns()
             root.add_event("event2", {"name": ["birthday"]}, now)
 
             mutable_list = ["original_contents"]
@@ -847,18 +835,14 @@ class TestSpan(unittest.TestCase):
         self.assertEqual(start_time, span.start_time)
 
         self.assertIsNotNone(span.status)
-        self.assertIs(
-            span.status.status_code, trace_api.status.StatusCode.UNSET
-        )
+        self.assertIs(span.status.status_code, trace_api.StatusCode.UNSET)
 
         # status
         new_status = trace_api.status.Status(
-            trace_api.status.StatusCode.ERROR, "Test description"
+            trace_api.StatusCode.ERROR, "Test description"
         )
         span.set_status(new_status)
-        self.assertIs(
-            span.status.status_code, trace_api.status.StatusCode.ERROR
-        )
+        self.assertIs(span.status.status_code, trace_api.StatusCode.ERROR)
         self.assertIs(span.status.description, "Test description")
 
     def test_start_accepts_context(self):
@@ -918,14 +902,12 @@ class TestSpan(unittest.TestCase):
         self.assertEqual(root.name, "root")
 
         new_status = trace_api.status.Status(
-            trace_api.status.StatusCode.ERROR, "Test description"
+            trace_api.StatusCode.ERROR, "Test description"
         )
 
         with self.assertLogs(level=WARNING):
             root.set_status(new_status)
-        self.assertEqual(
-            root.status.status_code, trace_api.status.StatusCode.UNSET
-        )
+        self.assertEqual(root.status.status_code, trace_api.StatusCode.UNSET)
 
     def test_error_status(self):
         def error_status_test(context):
@@ -947,17 +929,17 @@ class TestSpan(unittest.TestCase):
             .start_as_current_span("root")
         )
 
-    def test_override_error_status(self):
+    def test_last_status_wins(self):
         def error_status_test(context):
             with self.assertRaises(AssertionError):
                 with context as root:
-                    root.set_status(
-                        trace_api.status.Status(StatusCode.OK, "OK")
-                    )
+                    root.set_status(trace_api.status.Status(StatusCode.OK))
                     raise AssertionError("unknown")
 
-            self.assertIs(root.status.status_code, StatusCode.OK)
-            self.assertEqual(root.status.description, "OK")
+            self.assertIs(root.status.status_code, StatusCode.ERROR)
+            self.assertEqual(
+                root.status.description, "AssertionError: unknown"
+            )
 
         error_status_test(
             trace.TracerProvider().get_tracer(__name__).start_span("root")
